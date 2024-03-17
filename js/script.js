@@ -13,14 +13,14 @@ pintarReloj()
 let paused = true
 let intervalo
 btnPause.addEventListener("click" , event =>{
-    console.log("hola")
     if(paused){
         btnPause.style.height = "80px"
         paused = false
         intervalo = setInterval(function(){
-            pintarReloj()
             s++
-        }, 1000)
+            console.log(s)
+            pintarReloj()
+        }, 10)
     }
     else{
         btnPause.style.height = "100px"
@@ -60,7 +60,7 @@ function pintarReloj(){
 
 function pintarFondo(){
     contexto.beginPath()
-    contexto.arc(x, y, radio-10, 0, 2 * Math.PI)
+    contexto.arc(x, y, radio, 0, 2 * Math.PI)
     contexto.fillStyle = '#FBF5F3'
     contexto.fill();
     contexto.closePath();
@@ -127,7 +127,7 @@ function calcularSegundos(s) {
     contexto.fill();
     contexto.closePath();
 
-    let angS = s * 2 * Math.PI / 60;
+    let angS = (s * 2 * Math.PI / 60)/100;
     contexto.strokeStyle = "black";
     contexto.moveTo(radio, radio)
     contexto.lineTo(radio + radio * 0.9 * Math.sin(angS), radio - (radio * 0.9 * Math.cos(angS)))

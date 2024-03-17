@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Geo:ital@0;1&family=Orbitron:wght@400..900&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -40,7 +42,7 @@ canvas{
 #reset{
     height: 80px;
     width: 50px;
-    transform: rotate(-35deg);
+    transform: rotate(-36.5deg);
     position: absolute;
     bottom: 678px;
     left: 100px;
@@ -49,5 +51,23 @@ canvas{
     background-color: #39A0ED;
     border: 0;
     transition: height 0.3s ease, bottom 0.3s ease, left 0.3s ease;
+}
+
+.container__timer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 210px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.container__timer h1{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 5px solid gray;
+    font-family: "Orbitron";
 }
 
