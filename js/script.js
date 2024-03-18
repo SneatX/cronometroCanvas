@@ -34,7 +34,6 @@ function pintarReloj(){
     calcularSegundos(s)
 }
 
-
 function pintarFondo(){
     contexto.beginPath()
     contexto.arc(x, y, radio, 0, 2 * Math.PI)
@@ -42,6 +41,7 @@ function pintarFondo(){
     contexto.fill();
     contexto.closePath();
 }
+
 function pintarCirculo(){
     contexto.beginPath()
     contexto.arc(x, y, radio, 0, 2 * Math.PI) /*arc(posixion x, posicion y, radio, angulo inicio, angulo final) */
@@ -50,7 +50,6 @@ function pintarCirculo(){
     contexto.stroke()
     contexto.closePath();
 }
-
 
 function pintarLineas(){
     let cantidadLineas = 60
@@ -93,7 +92,6 @@ function pintarNumeros(){
             contexto.fillText(i.toString(), radio + (radio - 20) * 0.9 * Math.sin(i * 2 * Math.PI / 60), radio - ((radio - 20) * 0.9 * Math.cos(i * 2 * Math.PI / 60)));
         }
     }
-
 }
 
 function calcularSegundos(s) {
