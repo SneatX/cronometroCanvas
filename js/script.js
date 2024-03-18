@@ -7,6 +7,34 @@ const x = canvas.width / 2 // Posicion en x del circulo
 const y = canvas.height / 2 // Posicion en y del circulo
 const radio = canvas.width / 2
 let s = 0
+let m = 0
+let h = 0
+
+document.addEventListener("DOMContentLoaded", event => {
+    function actualizarFechaHora() {
+        let fecha = new Date();
+        let dia = fecha.getDate();
+        let mes = fecha.getMonth() + 1;
+        let año = fecha.getFullYear();
+
+        let horas = fecha.getHours();
+        let minutos = fecha.getMinutes();
+        let segundos = fecha.getSeconds();
+
+        if(horas > 12){
+            horas -= 12
+        }
+
+        segundos < 10 ? segundos = "0" + segundos : segundos
+        minutos < 10 ? minutos = "0" + minutos : minutos
+        horas < 10 ? horas = "0" + horas : horas
+
+        document.getElementById('fechaActual').innerHTML = `${dia}/${mes}/${año}`;
+        document.getElementById('horaActual').innerHTML = `${horas}:${minutos}:${segundos}`;
+    }
+
+    setInterval(actualizarFechaHora, 1000);
+});
 
 pintarReloj()
 
@@ -18,8 +46,19 @@ btnPause.addEventListener("click" , event =>{
         paused = false
         intervalo = setInterval(function(){
             s++
-            console.log(s)
             pintarReloj()
+            actualizarReloj()
+
+            if(s >= 6000){
+                s = 0
+                m++
+            }
+
+            if(m >= 60){
+                m = 0
+                h++
+            }
+
         }, 10)
     }
     else{
@@ -29,8 +68,21 @@ btnPause.addEventListener("click" , event =>{
     }
 })
 
+function actualizarReloj(){
+    let segundos = Math.trunc(s/100)
+
+    segundos < 10 ? document.getElementById("seconds").textContent = ("0" + Math.trunc(segundos)) : document.getElementById("seconds").textContent = Math.trunc(s/100)
+
+    m < 10 ? document.getElementById("minutes").textContent = ("0" + m) : document.getElementById("minutes").textContent = m
+
+    h < 10 ? document.getElementById("hours").textContent = ("0" + h) : document.getElementById("hours").textContent = h
+    
+}
+
 btnReset.addEventListener("click" , event =>{
     s = 0
+    m = 0
+    h = 0
     pintarReloj()
     clearInterval(intervalo)
     paused = true
@@ -46,6 +98,9 @@ btnReset.addEventListener("click" , event =>{
         }, 300); 
     }, 0);
 
+    document.getElementById("seconds").textContent = "00"
+    document.getElementById("minutes").textContent = "00"
+    document.getElementById("hours").textContent = "00"
 
 })
 
@@ -77,8 +132,6 @@ function pintarCirculo(){
 
 function pintarLineas(){
     let cantidadLineas = 60
-    contexto.textAlign = "center"
-    contexto.textBaseline = "middle"
     for (let i = 0; i < cantidadLineas; i++) {
         let x_final
         let y_final
@@ -110,6 +163,8 @@ function pintarLineas(){
 }
 
 function pintarNumeros(){
+    contexto.textAlign = "center"
+    contexto.textBaseline = "middle"
     for(let i = 0; i < 60; i++){
         contexto.fillStyle = "black";
         contexto.font = "30px Arial";

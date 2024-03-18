@@ -9,6 +9,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
     background-color: #121219;
@@ -59,15 +60,35 @@ canvas{
     right: 0;
     bottom: 210px;
     margin: auto;
+
     display: flex;
     justify-content: center;
+    background-color: white;
+    border: 5px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    width: 180px;
 }
 
 .container__timer h1{
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    border: 5px solid gray;
     font-family: "Orbitron";
+}
+
+#hour, #minutes, #seconds{
+    width: 60px;
+    text-align: center;
+}
+
+#container__fecha{
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    position: absolute;
+    left: 150px;
+    top: 100px;
+}
+
+#container__fecha *{
+    margin: 10px;
 }
 
