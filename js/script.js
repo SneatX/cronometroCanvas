@@ -10,63 +10,10 @@ let s = 0
 let m = 0
 let h = 0
 
-document.addEventListener("DOMContentLoaded", event => {
-    function actualizarFechaHora() {
-        let fecha = new Date();
-        let dia = fecha.getDate();
-        let mes = fecha.getMonth() + 1;
-        let año = fecha.getFullYear();
-
-        let horas = fecha.getHours();
-        let minutos = fecha.getMinutes();
-        let segundos = fecha.getSeconds();
-
-        if(horas > 12){
-            horas -= 12
-        }
-
-        segundos < 10 ? segundos = "0" + segundos : segundos
-        minutos < 10 ? minutos = "0" + minutos : minutos
-        horas < 10 ? horas = "0" + horas : horas
-
-        document.getElementById('fechaActual').innerHTML = `${dia}/${mes}/${año}`;
-        document.getElementById('horaActual').innerHTML = `${horas}:${minutos}:${segundos}`;
-    }
-
-    setInterval(actualizarFechaHora, 1000);
-});
-
-pintarReloj()
-
 let paused = true
 let intervalo
-btnPause.addEventListener("click" , event =>{
-    if(paused){
-        btnPause.style.height = "80px"
-        paused = false
-        intervalo = setInterval(function(){
-            s++
-            pintarReloj()
-            actualizarReloj()
 
-            if(s >= 6000){
-                s = 0
-                m++
-            }
-
-            if(m >= 60){
-                m = 0
-                h++
-            }
-
-        }, 10)
-    }
-    else{
-        btnPause.style.height = "100px"
-        paused = true
-        clearInterval(intervalo)
-    }
-})
+pintarReloj()
 
 function actualizarReloj(){
     let segundos = Math.trunc(s/100)
@@ -78,31 +25,6 @@ function actualizarReloj(){
     h < 10 ? document.getElementById("hours").textContent = ("0" + h) : document.getElementById("hours").textContent = h
     
 }
-
-btnReset.addEventListener("click" , event =>{
-    s = 0
-    m = 0
-    h = 0
-    pintarReloj()
-    clearInterval(intervalo)
-    paused = true
-    setTimeout(function() {
-        btnReset.style.height = "50px"; 
-        btnReset.style.left = "109px"
-        btnReset.style.bottom = "681px"
-    
-        setTimeout(function() {
-            btnReset.style.height = "80px"; 
-            btnReset.style.left = "100px"
-            btnReset.style.bottom = "678px"
-        }, 300); 
-    }, 0);
-
-    document.getElementById("seconds").textContent = "00"
-    document.getElementById("minutes").textContent = "00"
-    document.getElementById("hours").textContent = "00"
-
-})
 
 function pintarReloj(){
     pintarFondo()
@@ -152,7 +74,6 @@ function pintarLineas(){
             x_final = x + (radio - distanciaFinal) * Math.cos(angulo) // Coordenada x final
             y_final = y + (radio - distanciaFinal) * Math.sin(angulo) // Coordenada y final
         }
-
         contexto.beginPath()
         contexto.moveTo(xInicial, yInicial) // Mover al borde del círculo
         contexto.lineTo(x_final, y_final) // Línea hacia el centro, deteniéndose antes de llegar
@@ -190,6 +111,80 @@ function calcularSegundos(s) {
     contexto.stroke()
 }
 
+document.addEventListener("DOMContentLoaded", event => {
+    function actualizarFechaHora() {
+        let fecha = new Date();
+        let dia = fecha.getDate();
+        let mes = fecha.getMonth() + 1;
+        let año = fecha.getFullYear();
+
+        let horas = fecha.getHours();
+        let minutos = fecha.getMinutes();
+        let segundos = fecha.getSeconds();
+
+        if(horas > 12){
+            horas -= 12
+        }
+        segundos < 10 ? segundos = "0" + segundos : segundos
+        minutos < 10 ? minutos = "0" + minutos : minutos
+        horas < 10 ? horas = "0" + horas : horas
+        document.getElementById('fechaActual').innerHTML = `${dia}/${mes}/${año}`;
+        document.getElementById('horaActual').innerHTML = `${horas}:${minutos}:${segundos}`;
+    }
+
+    setInterval(actualizarFechaHora, 1000);
+});
+
+btnPause.addEventListener("click" , event =>{
+    if(paused){
+        btnPause.style.height = "80px"
+        paused = false
+        intervalo = setInterval(function(){
+            s++
+            pintarReloj()
+            actualizarReloj()
+            if(s >= 6000){
+                s = 0
+                m++
+            }
+
+            if(m >= 60){
+                m = 0
+                h++
+            }
+        }, 10)
+    }
+    else{
+        btnPause.style.height = "100px"
+        paused = true
+        clearInterval(intervalo)
+    }
+})
+
+btnReset.addEventListener("click" , event =>{
+    s = 0
+    m = 0
+    h = 0
+    pintarReloj()
+    clearInterval(intervalo)
+    paused = true
+    setTimeout(function() {
+        btnReset.style.height = "50px"; 
+        btnReset.style.left = "109px"
+        btnReset.style.bottom = "681px"
+    
+        setTimeout(function() {
+            btnReset.style.height = "80px"; 
+            btnReset.style.left = "100px"
+            btnReset.style.bottom = "678px"
+        }, 300); 
+    }, 0);
+
+    document.getElementById("seconds").textContent = "00"
+    document.getElementById("minutes").textContent = "00"
+    document.getElementById("hours").textContent = "00"
+
+})
 
 
 
